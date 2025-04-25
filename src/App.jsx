@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import WelcomePage from './WelcomePage';
+import WelcomePage from './pages/WelcomePage';
 import PublicPage from './PublicPage';
 import PrivateLayout from './layouts/PrivateLayout';
 import PublicLayout from './layouts/PublicLayout';

@@ -1,0 +1,14 @@
+.button {
+  min-width: 160px;
+}
+
+.green {
+  background-color: #52c41a !important;
+  border-color: #52c41a !important;
+  color: white !important;
+}
+
+.green:hover {
+  background-color: #73d13d !important;
+  border-color: #73d13d !important;
+}
