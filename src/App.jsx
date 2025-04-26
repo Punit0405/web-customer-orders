@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage';
 import ProductListingPage from './pages/ProductListingPage';
+import OrderReviewPage from './pages/OrderReviewPage';
 import PublicPage from './PublicPage';
 import PrivateLayout from './layouts/PrivateLayout';
 import PublicLayout from './layouts/PublicLayout';
@@ -16,6 +17,7 @@ function App() {
         <Route element={<PrivateLayout />}>
           <Route path="/home" element={<WelcomePage />} />
 <Route path="/products" element={<ProductListingPage />} />
+<Route path="/order-review" element={<OrderReviewPage />} />
         </Route>
         {/* Public route: fallback */}
         <Route element={<PublicLayout />}>
