@@ -3,7 +3,7 @@ import { Avatar, Tooltip } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import styles from './ProductCard.module.css';
 
-const ProductCard = ({ item, price, quantity, onIncrement, onDecrement }) => {
+const ProductCard = ({ item, price, quantity, onIncrement, onDecrement, showIncrement = true, showDecrement = true }) => {
   return (
     <div className={styles.productCard}>
       <div className={styles.productInfo}>
@@ -27,26 +27,30 @@ const ProductCard = ({ item, price, quantity, onIncrement, onDecrement }) => {
         </div>
       </div>
       <div className={styles.quantityControls}>
-        <Tooltip title="Decrease">
-          <button
-            className={styles.quantityBtn}
-            aria-label={`Decrease quantity of ${item}`}
-            onClick={onDecrement}
-            disabled={quantity === 0}
-          >
-            <MinusOutlined />
-          </button>
-        </Tooltip>
+        {showDecrement && (
+          <Tooltip title="Decrease">
+            <button
+              className={styles.quantityBtn}
+              aria-label={`Decrease quantity of ${item}`}
+              onClick={onDecrement}
+              disabled={quantity === 0}
+            >
+              <MinusOutlined />
+            </button>
+          </Tooltip>
+        )}
         <span className={styles.quantityValue}>{quantity}</span>
-        <Tooltip title="Increase">
-          <button
-            className={styles.quantityBtn}
-            aria-label={`Increase quantity of ${item}`}
-            onClick={onIncrement}
-          >
-            <PlusOutlined />
-          </button>
-        </Tooltip>
+        {showIncrement && (
+          <Tooltip title="Increase">
+            <button
+              className={styles.quantityBtn}
+              aria-label={`Increase quantity of ${item}`}
+              onClick={onIncrement}
+            >
+              <PlusOutlined />
+            </button>
+          </Tooltip>
+        )}
       </div>
     </div>
   );

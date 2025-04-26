@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { message } from 'antd';
 import { CheckCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import styles from './WelcomePage.module.css';
-import { useDispatch } from 'react-redux';
-import { clearOrder } from '../store/orderSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCurrentOrder, setCurrentOrder } from '../store/orderSlice';
 import { useNavigate } from 'react-router-dom';
 
 // Components
@@ -12,31 +12,23 @@ import ProductCard from '../components/ProductCard/ProductCard';
 import PageHeader from '../components/PageHeader/PageHeader';
 import PageFooter from '../components/PageFooter/PageFooter';
 
-const initialOrder = [
-  { key: 1, item: 'Product A', quantity: 2 },
-  { key: 2, item: 'Product B', quantity: 1 },
-];
+// No local initialOrder, will use Redux last_order/current_order
 
 export default function WelcomePage() {
-  const [order, setOrder] = useState(initialOrder);
-
-  const handleIncrement = (key) => {
-    setOrder(order.map(o => o.key === key ? { ...o, quantity: o.quantity + 1 } : o));
-  };
-
-  const handleDecrement = (key) => {
-    setOrder(order.map(o => o.key === key && o.quantity > 0 ? { ...o, quantity: o.quantity - 1 } : o));
-  };
-
-  const handleAction = (type) => {
-    message.success(`Action: ${type}`);
-  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const lastOrder = useSelector((state) => state.order.last_order);
 
+  // Add More Items: load last_order into current_order
+  const handleAddMoreItems = () => {
+    dispatch(setCurrentOrder(lastOrder));
+    navigate('/products');
+  };
+
+  // Create New Order: clear current_order
   const handleCreateNewOrder = () => {
-    dispatch(clearOrder());
+    dispatch(clearCurrentOrder());
     navigate('/products');
   };
 
@@ -49,25 +41,31 @@ export default function WelcomePage() {
         />
         <div>
           <section className={styles.productListSection}>
-            {order.map((item) => (
-              <ProductCard
-                key={item.key}
-                item={item.item}
-                quantity={item.quantity}
-                onIncrement={() => handleIncrement(item.key)}
-                onDecrement={() => handleDecrement(item.key)}
-              />
-            ))}
+            {lastOrder && lastOrder.length > 0 ? (
+              lastOrder.map((item) => (
+                <ProductCard
+                  key={item.key}
+                  item={item.name}
+                  price={item.price}
+                  quantity={item.quantity}
+                  showIncrement={false}
+                  showDecrement={false}
+                />
+              ))
+            ) : (
+              <div style={{color:'#888', padding:'2rem', textAlign:'center'}}>No previous order found. Start a new order!</div>
+            )}
           </section>
           <section className={styles.actionRow}>
             <Button
               type="primary"
               size="large"
               icon={<CheckCircleOutlined />}
-              onClick={() => handleAction('Add Other Items')}
-              aria-label="Add Other Items"
+              onClick={handleAddMoreItems}
+              aria-label="Add More Items"
+              disabled={!lastOrder || lastOrder.length === 0}
             >
-              Add Other Items
+              Add More Items
             </Button>
             <Button
               size="large"

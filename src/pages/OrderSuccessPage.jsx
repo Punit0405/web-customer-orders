@@ -13,7 +13,7 @@ export default function OrderSuccessPage() {
         <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: 64, marginBottom: 24 }} />
         <h1 className={styles.title}>Order Confirmed!</h1>
         <p className={styles.subtitle}>Thank you for your purchase. Your order has been placed successfully.</p>
-        <Button type="primary" size="large" onClick={() => navigate('/home')}>
+        <Button type="primary" size="large" onClick={() => navigate('/home')}> 
           Back to Home
         </Button>
       </div>

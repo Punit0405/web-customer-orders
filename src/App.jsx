@@ -18,9 +18,9 @@ function App() {
         {/* Private route: needs token in URL */}
         <Route element={<PrivateLayout />}>
           <Route path="/home" element={<WelcomePage />} />
-<Route path="/products" element={<ProductListingPage />} />
-<Route path="/order-review" element={<OrderReviewPage />} />
-<Route path="/order-success" element={<OrderSuccessPage />} />
+          <Route path="/products" element={<ProductListingPage />} />
+          <Route path="/order-review" element={<OrderReviewPage />} />
+          <Route path="/order-success" element={<OrderSuccessPage />} />
         </Route>
         {/* Public route: fallback */}
         <Route element={<PublicLayout />}>

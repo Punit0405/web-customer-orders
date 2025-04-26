@@ -4,23 +4,24 @@ import PageFooter from '../components/PageFooter/PageFooter';
 import styles from './OrderReviewPage.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setOrder } from '../store/orderSlice';
+import { setCurrentOrder, setLastOrder } from '../store/orderSlice';
 
 export default function OrderReviewPage() {
-  const order = useSelector((state) => state.order.items);
+  const order = useSelector((state) => state.order.current_order);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const total = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   // On "Back to Cart", restore quantities and go to products
   const handleBackToCart = () => {
-    // Restore order in redux (already present, but triggers re-render if needed)
-    dispatch(setOrder(order));
+    // Restore current_order in redux (already present, but triggers re-render if needed)
+    dispatch(setCurrentOrder(order));
     navigate('/products');
   };
 
-  // On "Confirm Order", go to success page
+  // On "Confirm Order", set last_order and go to order success page
   const handleConfirmOrder = () => {
+    dispatch(setLastOrder(order));
     navigate('/order-success');
   };
 
