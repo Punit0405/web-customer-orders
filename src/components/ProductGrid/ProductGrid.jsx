@@ -6,7 +6,7 @@ export default function ProductGrid({ products, quantities, onQuantityChange }) 
   return (
     <section className={styles.gridSection}>
       {products.map((product) => (
-        <div key={product.key} className={styles.gridItem}>
+        <div key={product.key} className={styles.gridItem} aria-label={`Product: ${product.name}`}> 
           <ProductCard
             item={product.name}
             price={product.price}

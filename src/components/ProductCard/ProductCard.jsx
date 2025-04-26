@@ -18,10 +18,13 @@ const ProductCard = ({ item, price, quantity, onIncrement, onDecrement }) => {
             boxShadow: '0 1px 8px #eaeaea'
           }}
         >
+          <span className={styles.visuallyHidden}>{item}</span>
           {item[0]}
         </Avatar>
-        <span className={styles.productName}>{item}</span>
-        <span className={styles.productPrice}>${price}</span>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <span className={styles.productName}>{item}</span>
+          <span className={styles.productPrice}>${price?.toFixed ? price.toFixed(2) : price}</span>
+        </div>
       </div>
       <div className={styles.quantityControls}>
         <Tooltip title="Decrease">

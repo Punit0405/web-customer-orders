@@ -9,6 +9,8 @@ export default function CategoryTabs({ categories, selected, onSelect }) {
           key={cat.key}
           className={selected === cat.key ? styles.tabActive : styles.tab}
           onClick={() => onSelect(cat.key)}
+          aria-selected={selected === cat.key}
+          tabIndex={0}
         >
           {cat.label}
         </button>

@@ -31,42 +31,43 @@ export default function WelcomePage() {
 
   return (
     <main className={styles.cartPageRoot}>
-      <PageHeader
-        title="Welcome, Customer!"
-        subtitle="Review and adjust your order below."
-      />
-      
-      <section className={styles.productListSection}>
-        {order.map((item) => (
-          <ProductCard
-            key={item.key}
-            item={item.item}
-            quantity={item.quantity}
-            onIncrement={() => handleIncrement(item.key)}
-            onDecrement={() => handleDecrement(item.key)}
-          />
-        ))}
-      </section>
-
-      <section className={styles.actionRow}>
-        <Button
-          type="primary"
-          size="large"
-          icon={<CheckCircleOutlined />}
-          onClick={() => handleAction('Add Other Items')}
-        >
-          Add Other Items
-        </Button>
-        <Button
-          size="large"
-          icon={<CloseCircleOutlined />}
-          variant="green"
-          onClick={() => handleAction('Create New Order')}
-        >
-          Create New Order
-        </Button>
-      </section>
-
+      <div className={styles.cartMainContent}>
+        <PageHeader
+          title="Welcome, Customer!"
+          subtitle="Review and adjust your order below."
+        />
+        <section className={styles.productListSection}>
+          {order.map((item) => (
+            <ProductCard
+              key={item.key}
+              item={item.item}
+              quantity={item.quantity}
+              onIncrement={() => handleIncrement(item.key)}
+              onDecrement={() => handleDecrement(item.key)}
+            />
+          ))}
+        </section>
+        <section className={styles.actionRow}>
+          <Button
+            type="primary"
+            size="large"
+            icon={<CheckCircleOutlined />}
+            onClick={() => handleAction('Add Other Items')}
+            aria-label="Add Other Items"
+          >
+            Add Other Items
+          </Button>
+          <Button
+            size="large"
+            icon={<CloseCircleOutlined />}
+            variant="green"
+            onClick={() => handleAction('Create New Order')}
+            aria-label="Create New Order"
+          >
+            Create New Order
+          </Button>
+        </section>
+      </div>
       <PageFooter />
     </main>
   );

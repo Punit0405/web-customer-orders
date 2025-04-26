@@ -54,48 +54,38 @@ export default function ProductListingPage() {
 
   return (
     <main className={styles.pageRoot}>
-      <PageHeader title="Shop by Category" subtitle="Select products and add to your cart." />
-      <CategoryTabs
-        categories={categories}
-        selected={selectedCategory}
-        onSelect={setSelectedCategory}
-      />
-      <ProductGrid
-        products={productsByCategory[selectedCategory]}
-        quantities={selectedQuantities}
-        onQuantityChange={handleQuantityChange}
-      />
-      <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+      <div className={styles.mainContent}>
+        <PageHeader title="Shop by Category" subtitle="Select products and add to your cart." />
+        <CategoryTabs
+          categories={categories}
+          selected={selectedCategory}
+          onSelect={setSelectedCategory}
+        />
+        <ProductGrid
+          products={productsByCategory[selectedCategory]}
+          quantities={selectedQuantities}
+          onQuantityChange={handleQuantityChange}
+        />
         <button
           className={styles.addAllBtn}
           onClick={handleAddAllToCart}
-          style={{
-            background: '#4364f7',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 8,
-            padding: '1rem 2.5rem',
-            fontSize: '1.1rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(67,100,247,0.07)',
-          }}
         >
           Add to Cart
         </button>
+        {cart.length > 0 && (
+          <section className={styles.selectedItemsSection}>
+            <h3 style={{ marginBottom: '1rem', color: '#4364f7' }}>Selected Items</h3>
+            <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+              {cart.map((item) => (
+                <li key={item.key} className={styles.selectedItemRow}>
+                  <span className={styles.selectedItemName}>{item.name}</span>
+                  <span className={styles.selectedItemQty}>{item.quantity}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
-      {cart.length > 0 && (
-        <section style={{ maxWidth: 500, margin: '2rem auto', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.04)', padding: '1.5rem' }}>
-          <h3 style={{ marginBottom: '1rem', color: '#4364f7' }}>Selected Items</h3>
-          <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
-            {cart.map((item) => (
-              <li key={item.key} style={{ marginBottom: 8, fontSize: '1.05rem' }}>
-                <span style={{ fontWeight: 500 }}>{item.name}</span>: <span style={{ color: '#4364f7', fontWeight: 700 }}>{item.quantity}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
       <PageFooter />
     </main>
   );

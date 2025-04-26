@@ -1,9 +1,14 @@
 .tabsNav {
   display: flex;
-  gap: 1rem;
-  margin: 1.5rem 0 1rem 0;
+  gap: 1.2rem;
+  margin: 2rem 0 1.5rem 0;
   justify-content: center;
+  background: #e3f0ff;
+  border-radius: 12px;
+  padding: 0.4rem 0.5rem;
+  box-shadow: 0 2px 8px rgba(67,100,247,0.06);
 }
+
 .tab {
   background: #f0f5ff;
   color: #4364f7;
@@ -14,6 +19,11 @@
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+  outline: none;
+}
+.tab:focus {
+  box-shadow: 0 0 0 2px #6fb1fc;
+  z-index: 1;
 }
 .tabActive {
   background: #fff;
