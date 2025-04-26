@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { message } from 'antd';
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import styles from './WelcomePage.module.css';
 import { useDispatch } from 'react-redux';
 import { clearOrder } from '../store/orderSlice';
@@ -71,7 +71,7 @@ export default function WelcomePage() {
             </Button>
             <Button
               size="large"
-              icon={<CloseCircleOutlined />}
+              icon={<PlusOutlined />}
               variant="green"
               onClick={handleCreateNewOrder}
               aria-label="Create New Order"

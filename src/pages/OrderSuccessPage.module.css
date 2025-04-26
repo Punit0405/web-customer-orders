@@ -1,0 +1,29 @@
+.successRoot {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f7faff 70%, #e3f0ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.successCard {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(67,100,247,0.07);
+  padding: 3rem 2.5rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+}
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #52c41a;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 1.15rem;
+  color: #4364f7;
+  margin-bottom: 2.2rem;
+  text-align: center;
+}

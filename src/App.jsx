@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage';
 import ProductListingPage from './pages/ProductListingPage';
 import OrderReviewPage from './pages/OrderReviewPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 import PublicPage from './PublicPage';
 import PublicUserInfoPage from './pages/PublicUserInfoPage';
 import PrivateLayout from './layouts/PrivateLayout';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<WelcomePage />} />
 <Route path="/products" element={<ProductListingPage />} />
 <Route path="/order-review" element={<OrderReviewPage />} />
+<Route path="/order-success" element={<OrderSuccessPage />} />
         </Route>
         {/* Public route: fallback */}
         <Route element={<PublicLayout />}>

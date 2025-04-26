@@ -2,11 +2,27 @@ import React from 'react';
 import PageHeader from '../components/PageHeader/PageHeader';
 import PageFooter from '../components/PageFooter/PageFooter';
 import styles from './OrderReviewPage.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setOrder } from '../store/orderSlice';
 
 export default function OrderReviewPage() {
   const order = useSelector((state) => state.order.items);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const total = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  // On "Back to Cart", restore quantities and go to products
+  const handleBackToCart = () => {
+    // Restore order in redux (already present, but triggers re-render if needed)
+    dispatch(setOrder(order));
+    navigate('/products');
+  };
+
+  // On "Confirm Order", go to success page
+  const handleConfirmOrder = () => {
+    navigate('/order-success');
+  };
 
   return (
     <main className={styles.pageRoot}>
@@ -35,8 +51,8 @@ export default function OrderReviewPage() {
           )}
         </section>
         <section className={styles.actionRow}>
-          <button className={styles.primaryBtn} aria-label="Confirm Order">Confirm Order</button>
-          <button className={styles.secondaryBtn} aria-label="Back to Cart">Back to Cart</button>
+          <button className={styles.primaryBtn} aria-label="Confirm Order" onClick={handleConfirmOrder}>Confirm Order</button>
+          <button className={styles.secondaryBtn} aria-label="Back to Cart" onClick={handleBackToCart}>Back to Cart</button>
         </section>
       </div>
       <PageFooter />
