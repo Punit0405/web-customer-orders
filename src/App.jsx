@@ -4,6 +4,7 @@ import WelcomePage from './pages/WelcomePage';
 import ProductListingPage from './pages/ProductListingPage';
 import OrderReviewPage from './pages/OrderReviewPage';
 import PublicPage from './PublicPage';
+import PublicUserInfoPage from './pages/PublicUserInfoPage';
 import PrivateLayout from './layouts/PrivateLayout';
 import PublicLayout from './layouts/PublicLayout';
 import 'antd/dist/reset.css';
@@ -21,7 +22,7 @@ function App() {
         </Route>
         {/* Public route: fallback */}
         <Route element={<PublicLayout />}>
-          <Route path="/public" element={<PublicPage />} />
+          <Route path="/public" element={<PublicUserInfoPage />} />
         </Route>
         {/* Catch-all: redirect to public */}
         <Route path="*" element={<Navigate to="/public" replace />} />

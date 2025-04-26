@@ -37,7 +37,7 @@ export default function WelcomePage() {
 
   const handleCreateNewOrder = () => {
     dispatch(clearOrder());
-    navigate('/products?token=punit');
+    navigate('/products');
   };
 
   return (

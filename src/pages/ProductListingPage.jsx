@@ -53,7 +53,7 @@ export default function ProductListingPage() {
       .filter((p) => selectedQuantities[p.key] > 0)
       .map((p) => ({ key: p.key, name: p.name, price: p.price, quantity: selectedQuantities[p.key] }));
     dispatch(setOrder(selected));
-    navigate('/order-review?token=punit');
+    navigate('/order-review');
   };
 
   return (

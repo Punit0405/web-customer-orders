@@ -3,10 +3,9 @@ import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import CommonLayout from './CommonLayout';
 
 export default function PrivateLayout() {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const token = params.get('token');
-  
+  // Check token in localStorage
+  const token = localStorage.getItem('auth_token');
+
   if (!token) {
     return <Navigate to="/public" replace />;
   }
