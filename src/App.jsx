@@ -15,18 +15,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Private route: needs token in URL */}
         <Route element={<PrivateLayout />}>
           <Route path="/home" element={<WelcomePage />} />
           <Route path="/products" element={<ProductListingPage />} />
           <Route path="/order-review" element={<OrderReviewPage />} />
           <Route path="/order-success" element={<OrderSuccessPage />} />
         </Route>
-        {/* Public route: fallback */}
         <Route element={<PublicLayout />}>
           <Route path="/public" element={<PublicUserInfoPage />} />
         </Route>
-        {/* Catch-all: redirect to public */}
         <Route path="*" element={<Navigate to="/public" replace />} />
       </Routes>
     </BrowserRouter>

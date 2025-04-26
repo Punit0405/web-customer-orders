@@ -6,13 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCurrentOrder, setCurrentOrder } from '../store/orderSlice';
 import { useNavigate } from 'react-router-dom';
 
-// Components
 import Button from '../components/Button/Button';
 import ProductCard from '../components/ProductCard/ProductCard';
 import PageHeader from '../components/PageHeader/PageHeader';
 import PageFooter from '../components/PageFooter/PageFooter';
-
-// No local initialOrder, will use Redux last_order/current_order
 
 export default function WelcomePage() {
 
@@ -20,13 +17,11 @@ export default function WelcomePage() {
   const navigate = useNavigate();
   const lastOrder = useSelector((state) => state.order.last_order);
 
-  // Add More Items: load last_order into current_order
   const handleAddMoreItems = () => {
     dispatch(setCurrentOrder(lastOrder));
     navigate('/products');
   };
 
-  // Create New Order: clear current_order
   const handleCreateNewOrder = () => {
     dispatch(clearCurrentOrder());
     navigate('/products');

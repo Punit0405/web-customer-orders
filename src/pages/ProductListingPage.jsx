@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentOrder } from '../store/orderSlice';
 import { useNavigate } from 'react-router-dom';
 
-// Canonical product schema (could be fetched from backend in real app)
 const canonicalProducts = [
   { key: 1, name: 'Apple', price: 30, category: 'fruits' },
   { key: 2, name: 'Banana', price: 10, category: 'fruits' },
@@ -33,15 +32,12 @@ function getProductsByCategory(products) {
 }
 
 export default function ProductListingPage() {
-  // Redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentOrder = useSelector((state) => state.order.current_order);
 
-  // State for selected category
   const [selectedCategory, setSelectedCategory] = useState(categories[0].key);
 
-  // Map current_order to { [key]: quantity }
   const initialQuantities = React.useMemo(() => {
     const q = {};
     currentOrder.forEach(item => { q[item.key] = item.quantity; });
@@ -49,32 +45,25 @@ export default function ProductListingPage() {
   }, [currentOrder]);
   const [selectedQuantities, setSelectedQuantities] = useState(initialQuantities);
 
-  // Keep selectedQuantities in sync with currentOrder from redux
   React.useEffect(() => {
     setSelectedQuantities(initialQuantities);
   }, [initialQuantities]);
 
-  // All products from canonical schema
   const productsByCategory = React.useMemo(() => getProductsByCategory(canonicalProducts), []);
 
-  // Handle quantity change for a product
   const handleQuantityChange = (product, quantity) => {
     setSelectedQuantities((prev) => ({
       ...prev,
       [product.key]: quantity,
     }));
-    // Update current_order in redux
     let updatedOrder = canonicalProducts.map((p) =>
       p.key === product.key ? { ...p, quantity } : { ...p, quantity: selectedQuantities[p.key] || 0 }
     );
-    // Only keep products with quantity > 0
     updatedOrder = updatedOrder.filter((p) => p.quantity > 0);
     dispatch(setCurrentOrder(updatedOrder));
   };
 
-  // Add all products with quantity > 0 to redux, then go to order review
   const handleAddAllToCart = () => {
-    // Build current order from selectedQuantities
     const selected = canonicalProducts
       .filter((p) => selectedQuantities[p.key] > 0)
       .map((p) => ({ ...p, quantity: selectedQuantities[p.key] }));

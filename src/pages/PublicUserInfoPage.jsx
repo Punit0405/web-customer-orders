@@ -11,7 +11,6 @@ export default function PublicUserInfoPage() {
     const params = new URLSearchParams(location.search);
     const token = params.get('token');
     if (token) {
-      // Simulate API/processing delay
       setTimeout(() => {
         localStorage.setItem('auth_token', token);
         setLoading(false);
