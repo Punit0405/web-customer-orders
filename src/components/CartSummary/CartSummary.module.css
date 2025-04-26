@@ -1,0 +1,28 @@
+.cartSummary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 2rem 0;
+}
+.summaryContent {
+  background: #e3f0ff;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.summaryTitle {
+  color: #4364f7;
+  font-weight: 700;
+}
+.summaryAmount {
+  color: #1a1a1a;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.summaryItems {
+  color: #888;
+}

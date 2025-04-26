@@ -3,7 +3,7 @@ import { Avatar, Tooltip } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import styles from './ProductCard.module.css';
 
-const ProductCard = ({ item, quantity, onIncrement, onDecrement }) => {
+const ProductCard = ({ item, price, quantity, onIncrement, onDecrement }) => {
   return (
     <div className={styles.productCard}>
       <div className={styles.productInfo}>
@@ -21,6 +21,7 @@ const ProductCard = ({ item, quantity, onIncrement, onDecrement }) => {
           {item[0]}
         </Avatar>
         <span className={styles.productName}>{item}</span>
+        <span className={styles.productPrice}>${price}</span>
       </div>
       <div className={styles.quantityControls}>
         <Tooltip title="Decrease">

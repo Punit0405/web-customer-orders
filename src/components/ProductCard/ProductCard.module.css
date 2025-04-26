@@ -25,6 +25,13 @@
   color: #1a1a1a;
 }
 
+.productPrice {
+  font-size: 0.98rem;
+  color: #888;
+  margin-left: 0.75rem;
+  font-weight: 400;
+}
+
 .quantityControls {
   display: flex;
   align-items: center;

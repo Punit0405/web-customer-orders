@@ -1,0 +1,6 @@
+.pageRoot {
+  min-height: 100vh;
+  background: #f7faff;
+  display: flex;
+  flex-direction: column;
+}
