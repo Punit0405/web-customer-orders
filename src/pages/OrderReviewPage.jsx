@@ -12,14 +12,11 @@ export default function OrderReviewPage() {
   const navigate = useNavigate();
   const total = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // On "Back to Cart", restore quantities and go to products
   const handleBackToCart = () => {
-    // Restore current_order in redux (already present, but triggers re-render if needed)
     dispatch(setCurrentOrder(order));
     navigate('/products');
   };
 
-  // On "Confirm Order", set last_order and go to order success page
   const handleConfirmOrder = () => {
     dispatch(setLastOrder(order));
     navigate('/order-success');
