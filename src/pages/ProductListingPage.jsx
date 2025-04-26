@@ -4,6 +4,9 @@ import ProductGrid from '../components/ProductGrid/ProductGrid';
 import PageHeader from '../components/PageHeader/PageHeader';
 import PageFooter from '../components/PageFooter/PageFooter';
 import styles from './ProductListingPage.module.css';
+import { useDispatch } from 'react-redux';
+import { setOrder } from '../store/orderSlice';
+import { useNavigate } from 'react-router-dom';
 
 // Example categories and products (replace with real data/fetch)
 const categories = [
@@ -32,7 +35,8 @@ export default function ProductListingPage() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0].key);
   // Track selected quantity per product across all categories
   const [selectedQuantities, setSelectedQuantities] = useState({});
-  const [cart, setCart] = useState([]); // Array of {key, name, quantity}
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Handle quantity change for a product
   const handleQuantityChange = (product, quantity) => {
@@ -42,14 +46,14 @@ export default function ProductListingPage() {
     }));
   };
 
-  // Add all products with quantity > 0 to cart
+  // Add all products with quantity > 0 to redux, then go to order review
   const handleAddAllToCart = () => {
-    // Collect all products from all categories
     const allProducts = Object.values(productsByCategory).flat();
     const selected = allProducts
       .filter((p) => selectedQuantities[p.key] > 0)
-      .map((p) => ({ key: p.key, name: p.name, quantity: selectedQuantities[p.key] }));
-    setCart(selected);
+      .map((p) => ({ key: p.key, name: p.name, price: p.price, quantity: selectedQuantities[p.key] }));
+    dispatch(setOrder(selected));
+    navigate('/order-review?token=punit');
   };
 
   return (
@@ -72,19 +76,6 @@ export default function ProductListingPage() {
         >
           Add to Cart
         </button>
-        {cart.length > 0 && (
-          <section className={styles.selectedItemsSection}>
-            <h3 style={{ marginBottom: '1rem', color: '#4364f7' }}>Selected Items</h3>
-            <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
-              {cart.map((item) => (
-                <li key={item.key} className={styles.selectedItemRow}>
-                  <span className={styles.selectedItemName}>{item.name}</span>
-                  <span className={styles.selectedItemQty}>{item.quantity}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
       </div>
       <PageFooter />
     </main>

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { message } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import styles from './WelcomePage.module.css';
+import { useDispatch } from 'react-redux';
+import { clearOrder } from '../store/orderSlice';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import Button from '../components/Button/Button';
@@ -29,6 +32,14 @@ export default function WelcomePage() {
     message.success(`Action: ${type}`);
   };
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleCreateNewOrder = () => {
+    dispatch(clearOrder());
+    navigate('/products?token=punit');
+  };
+
   return (
     <main className={styles.cartPageRoot}>
       <div className={styles.cartMainContent}>
@@ -36,37 +47,39 @@ export default function WelcomePage() {
           title="Welcome, Customer!"
           subtitle="Review and adjust your order below."
         />
-        <section className={styles.productListSection}>
-          {order.map((item) => (
-            <ProductCard
-              key={item.key}
-              item={item.item}
-              quantity={item.quantity}
-              onIncrement={() => handleIncrement(item.key)}
-              onDecrement={() => handleDecrement(item.key)}
-            />
-          ))}
-        </section>
-        <section className={styles.actionRow}>
-          <Button
-            type="primary"
-            size="large"
-            icon={<CheckCircleOutlined />}
-            onClick={() => handleAction('Add Other Items')}
-            aria-label="Add Other Items"
-          >
-            Add Other Items
-          </Button>
-          <Button
-            size="large"
-            icon={<CloseCircleOutlined />}
-            variant="green"
-            onClick={() => handleAction('Create New Order')}
-            aria-label="Create New Order"
-          >
-            Create New Order
-          </Button>
-        </section>
+        <div>
+          <section className={styles.productListSection}>
+            {order.map((item) => (
+              <ProductCard
+                key={item.key}
+                item={item.item}
+                quantity={item.quantity}
+                onIncrement={() => handleIncrement(item.key)}
+                onDecrement={() => handleDecrement(item.key)}
+              />
+            ))}
+          </section>
+          <section className={styles.actionRow}>
+            <Button
+              type="primary"
+              size="large"
+              icon={<CheckCircleOutlined />}
+              onClick={() => handleAction('Add Other Items')}
+              aria-label="Add Other Items"
+            >
+              Add Other Items
+            </Button>
+            <Button
+              size="large"
+              icon={<CloseCircleOutlined />}
+              variant="green"
+              onClick={handleCreateNewOrder}
+              aria-label="Create New Order"
+            >
+              Create New Order
+            </Button>
+          </section>
+        </div>
       </div>
       <PageFooter />
     </main>
